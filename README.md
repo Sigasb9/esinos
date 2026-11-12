@@ -19,7 +19,7 @@ python -m unittest discover -s code/tests -t code -v
 
 ## Équipe
 
-- Sami : process, gantt, main, paging, optimal, tlb, intégration
+- Sami : process, main, optimal, tlb, intégration
 - Ilias : rr, priority, lru
 - Adam : fcfs, sjf, metrics, rapport
-- Yassine : fifo, tests, README, vidéo
+- Yassine : fifo, paging, gantt, tests, README, vidéo
