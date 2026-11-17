@@ -1,20 +1,14 @@
-"""
-Ordonnancement Round Robin (tourniquet) avec un quantum fixe.
-Convention : les processus arrivés pendant une tranche entrent dans la file AVANT le processus interrompu.
-"""
-
 
 from collections import deque
-
 
 def rr(procs, quantum):
     """Exécute chaque processus au plus `quantum` unités à tour de rôle. Renvoie le Gantt.
 
-    procs : liste de tuples (pid, arrivee, burst)
+    procs : liste de Process (comme les autres ordonnanceurs)
     Retour : liste de tuples (pid, debut, fin), avec "IDLE" pour les périodes d'inactivité.
     """
     # 1. trier par arrivée ; reste = {pid: burst} ; file = deque() ; temps = 0
-    procs = sorted(procs, key=lambda p: p[1])
+    procs = sorted(((p.pid, p.arrival, p.burst) for p in procs), key=lambda p: p[1])   # Process -> tuples
     reste = {pid: burst for pid, _, burst in procs}
     file = deque()
     gantt = []
