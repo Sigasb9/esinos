@@ -1,3 +1,4 @@
+
 """
 Tests de la mémoire : remplacement de pages, pagination, TLB.
 Lancer : python -m unittest discover -s code/tests -t code -v
@@ -47,6 +48,14 @@ class TestPaging(unittest.TestCase):
         with self.assertRaises(PageFault) as ctx:
             translate(600, {0: 3})
         self.assertEqual(ctx.exception.page, 1)
+
+    # Nouveau test1 vérifier la traduction d'une adresse dans la première page
+    def test_premiere_page(self):
+        self.assertEqual(translate(100, {0: 2}), 2 * PAGE_SIZE + 100)
+
+    # Nouveau test2 vérifier une adresse avec un décalage nul
+    def test_decalage_zero(self):
+        self.assertEqual(translate(512, {1: 3}), 3 * PAGE_SIZE)
 
 
 class TestTLB(unittest.TestCase):

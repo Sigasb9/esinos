@@ -1,3 +1,4 @@
+
 """
 Tests des ordonnanceurs et des métriques sur l'exemple du cours.
 Lancer : python -m unittest discover -s code/tests -t code -v
@@ -36,6 +37,18 @@ class TestOrdonnanceurs(unittest.TestCase):
                    ("P1", 15, 16), ("P3", 16, 20), ("P4", 20, 22)]
         self.assertEqual(rr(EXEMPLE, 4), attendu)
         self.verifier(rr(EXEMPLE, 4), 9.25, 14.75)
+
+    # Nouveau test1 vérifier FCFS avec un seul processus
+    def test_fcfs_un_seul_processus(self):
+        processus = [{"pid": "P1", "arrivee": 0, "duree": 5}]
+        attendu = [("P1", 0, 5)]
+        self.assertEqual(fcfs(processus), attendu)
+
+    # Nouveau test2 vérifier Round Robin avec un quantum de 1
+    def test_rr_quantum_un(self):
+        processus = [{"pid": "P1", "arrivee": 0, "duree": 2}]
+        attendu = [("P1", 0, 1), ("P1", 1, 2)]
+        self.assertEqual(rr(processus, 1), attendu)
 
 
 if __name__ == "__main__":
